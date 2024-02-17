@@ -23,6 +23,16 @@ pipeline {
                 }
             }
         }
+	stage('Push Docker Images') {
+            steps {
+                script{
+                    docker.withRegistry('', 'DockerId') {
+                    sh 'docker tag calculator_image pracheti/calculator_image:latest'
+                    sh 'docker push pracheti/calculator_image'
+                    }
+                 }
+            }
+        }
     }
 }
 
